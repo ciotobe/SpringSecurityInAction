@@ -37,7 +37,6 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
     	
     	http.authorizeRequests()
     		.anyRequest()
-    		//.authenticated();
-    		.permitAll();
+    		.authenticated();
     }
 }
