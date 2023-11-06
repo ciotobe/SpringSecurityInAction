@@ -1,5 +1,6 @@
 package com.github.ciotobe.ssia.chapter5.controller;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,5 +12,14 @@ public class HelloController {
 	@RequestMapping("/hello")
 	public String hello(Authentication a) {
 		return "Hello, " + a.getName() + "!";
+	}
+	
+	@RequestMapping("/bye")
+	@Async
+	public String goodbye() {
+		SecurityContext context = SecurityContextHolder.getContext();
+		Authentication a = context.getAuthentication();
+		
+		return "Goodbye, " + a.getName() + "!";
 	}
 }
