@@ -19,12 +19,12 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
 		
 		var user1 = User.withUsername("john")
 				        .password("12345")
-				        .authorities("read")
+				        .authorities("ROLE_ADMIN")
 				        .build();
 		
 		var user2 = User.withUsername("jane")
 						.password("12345")
-						.authorities("read", "write", "delete")
+						.authorities("ROLE_MANAGER")
 						.build();
 		
 		manager.createUser(user1);
@@ -41,8 +41,6 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception{
 		http.httpBasic();
 		
-		String expression = "hasAuthority('read') and !hasAuthority('delete')";
-		
-		http.authorizeRequests().anyRequest().access(expression);
+		http.authorizeRequests().anyRequest().hasRole("ADMIN");
 	}
 }
