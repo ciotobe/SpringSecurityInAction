@@ -19,7 +19,7 @@ public class MainController {
 	
 	@PostMapping("/test")
 	@ResponseBody
-	@CrossOrigin("http://localhost:8080")
+	//@CrossOrigin("http://localhost:8080")
 	public String test() {
 		logger.info("Test method called");
 		return "HELLO";
